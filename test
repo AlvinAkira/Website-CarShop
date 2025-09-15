@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizontal Photo Slider</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .slider-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider {
+            display: flex;
+            height: 500px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .controls button {
+            background: rgba(255, 255, 255, 0.7);
+            border: none;
+            color: #333;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 0 20px;
+            transition: all 0.3s ease;
+        }
+
+        .controls button:hover {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .dot-navigation {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .dot.active {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (max-width: 768px) {
+            .slider {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slider {
+                height: 300px;
+            }
+            
+            .controls button {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e4cc6ad3-0f34-4be6-aa0d-e66e9f8e5f4c.png" alt="Golden sunrise over mountain peaks with mist in the valley below, panoramic landscape view">
+                <div class="caption">
+                    <h2>Sunrise Mountains</h2>
+                    <p>Beautiful morning view of the mountain range</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/55d6a5e7-c7a1-49a4-9fe7-df6198c928b7.png" alt="Tropical beach with crystal clear water, white sand and palm trees under blue sky">
+                <div class="caption">
+                    <h2>Tropical Paradise</h2>
+                    <p>Relaxing beach vacation destination</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9631023f-4548-4ad1-b175-37fe29fa1540.png" alt="Modern city skyline at night with glowing skyscrapers and colorful lights">
+                <div class="caption">
+                    <h2>City Lights</h2>
+                    <p>Vibrant urban night scene</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a4cceadf-0cfd-4ec1-b4ab-a4a90e2286b1.png" alt="Autumn forest with colorful falling leaves in shades of red, orange and yellow">
+                <div class="caption">
+                    <h2>Autumn Forest</h2>
+                    <p>Seasonal colors in nature</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="prev-btn">❮</button>
+            <button class="next-btn">❯</button>
+        </div>
+
+        <div class="dot-navigation">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const dots = document.querySelectorAll('.dot');
+            
+            let currentIndex = 0;
+            const slideCount = slides.length;
+            
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                
+                // Update dot navigation
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                updateSlider();
+            }
+            
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+                updateSlider();
+            }
+            
+            // Auto slide every 5 seconds
+            let slideInterval = setInterval(nextSlide, 5000);
+            
+            // Pause on hover
+            slider.parentElement.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+            
+            slider.parentElement.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+            
+            // Button navigation
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            // Dot navigation
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////
+<!-- Car Item 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md car-card transition duration-300">
+                    <div class="relative">
+                        <img src="gambar/turbo.jpg"
+                            alt="Honda Civic Turbo RS 2022 warna putih mutiara dengan velg racing orisinil"
+                            class="w-full h-56 object-cover">
+                        <span
+                            class="absolute top-4 left-4 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full">Best
+                            Deal</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Honda Civic Turbo</h3>
+                                <p class="text-gray-600">2022 • 12.500 km</p>
+                            </div>
+                            <span class="text-xl font-bold text-blue-600">Rp 560jt</span>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Sedan</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Bensin</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">CVT</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Full Options</span>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                            <button onclick="openModal('civicModal')"
+                                class="text-blue-600 hover:text-blue-800 font-medium">
+                                Lihat Detail
+                            </button>
+                            <button
+                                class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">
+                                Ajukan Penawaran
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="civicModal"
+                    class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div
+                        class="bg-white w-full max-w-2xl rounded-xl shadow-lg p-6 relative max-h-screen overflow-y-auto">
+
+                        <!-- Tombol close -->
+                        <button onclick="closeModal('civicModal')"
+                            class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-2xl">&times;</button>
+
+                        <img src="gambar/turbo.jpg" alt="Honda Civic Turbo RS 2022"
+                            class="w-full h-64 object-cover rounded-lg">
+
+                        <h1 class="text-2xl font-bold text-gray-800 mt-4">Honda Civic Turbo RS 2022</h1>
+                        <p class="text-gray-600">Warna Putih Mutiara • 12.500 km • CVT • Bensin</p>
+                        <p class="text-2xl font-bold text-blue-600 mt-2">Rp 560.000.000</p>
+
+                        <h2 class="text-lg font-semibold mt-6">Spesifikasi</h2>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>Mesin: 1.5L Turbocharged</li>
+                            <li>Transmisi: CVT dengan Paddle Shift</li>
+                            <li>Velg Racing Orisinil</li>
+                            <li>Interior: Kulit Hitam</li>
+                            <li>Fitur: Honda Sensing, LaneWatch, Sunroof</li>
+                            <li>Kondisi: Sangat Mulus, Servis Resmi Honda</li>
+                        </ul>
+
+                        <div class="mt-6 flex gap-3 pb-4">
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                                Hubungi Penjual
+                            </button>
+                            <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                                Ajukan Penawaran
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car Item 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md car-card transition duration-300">
+                    <div class="relative">
+                        <img src="gambar/Ertiga.jpeg"
+                            alt="Suzuki Ertiga 2020 warna silver dengan interior beige, kondisi sangat terawat"
+                            class="w-full h-56 object-cover">
+                        <span
+                            class="absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">Ekonomis</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Suzuki Ertiga</h3>
+                                <p class="text-gray-600">2020 • 45.000 km</p>
+                            </div>
+                            <span class="text-xl font-bold text-blue-600">Rp 210jt</span>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">MPV</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Bensin</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Automatic</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Keluarga</span>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                            <button onclick="openModal('ertigaModal')"
+                                class="text-blue-600 hover:text-blue-800 font-medium">
+                                Lihat Detail
+                            </button>
+                            <button
+                                class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">
+                                Ajukan Penawaran
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="ertigaModal"
+                    class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div
+                        class="bg-white w-full max-w-2xl rounded-xl shadow-lg p-6 relative max-h-screen overflow-y-auto">
+
+                        <!-- Tombol close -->
+                        <button onclick="closeModal('ertigaModal')"
+                            class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-2xl">&times;</button>
+
+                        <img src="gambar/Ertiga.jpeg" alt="Suzuki Ertiga 2020"
+                            class="w-full h-64 object-cover rounded-lg">
+
+                        <h1 class="text-2xl font-bold text-gray-800 mt-4">Suzuki Ertiga 2020</h1>
+                        <p class="text-gray-600">Warna Silver • 45.000 km • Automatic • Bensin</p>
+                        <p class="text-2xl font-bold text-blue-600 mt-2">Rp 210.000.000</p>
+
+                        <h2 class="text-lg font-semibold mt-6">Spesifikasi</h2>
+                        <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                            <li>Mesin: 1.5L DOHC VVT</li>
+                            <li>Kapasitas: 7 Penumpang</li>
+                            <li>Interior: Beige, bersih & terawat</li>
+                            <li>Fitur: AC Double Blower, Head Unit Touchscreen</li>
+                            <li>Kondisi: Sangat Terawat, Pajak Hidup</li>
+                        </ul>
+
+                        <div class="mt-6 flex gap-3 pb-4">
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                                Hubungi Penjual
+                            </button>
+                            <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                                Ajukan Penawaran
+                            </button>
+                        </div>
+                    </div>
+                </div>
+

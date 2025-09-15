@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Shop - Jual Beli Mobil Terpercaya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="back">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <img src="gambar/logo.jpg" alt="Logo cars fade-inhop - Simbol mobil modern dengan warna biru gradient"
+                        class="h-12">
+                    <span class="text-xl font-bold text-blue-600">CarShop</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium">Beranda</a>
+                    <a href="inventory.html" class="text-gray-700 hover:text-blue-600 font-medium">Inventaris</a>
+                    <a href="kontak.html" class="text-gray-700 hover:text-blue-600 font-medium">Kontak</a>
+                </div>
+                <button class="md:hidden focus:outline-none">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- Search Section -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-6 pl-10 pr-10 ">
+        <div>
+            <label class="block text-gray-700 text-sm font-medium mb-1">Tipe Mobil</label>
+            <select class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option>Semua Tipe</option>
+                <option>SUV</option>
+                <option>Sedan</option>
+                <option>MPV</option>
+                <option>Hatchback</option>
+                <option>Sport</option>
+            </select>
+        </div>
+        <div>
+            <label class="block text-gray-700 text-sm font-medium mb-1">Merek</label>
+            <select class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option>Semua Merek</option>
+                <option>Toyota</option>
+                <option>Honda</option>
+                <option>Suzuki</option>
+                <option>Mitsubishi</option>
+                <option>Daihatsu</option>
+            </select>
+        </div>
+        <div>
+            <label class="block text-gray-700 text-sm font-medium mb-1">Harga</label>
+            <select class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option>Semua Harga</option>
+                <option>Dibawah 100 juta</option>
+                <option>100-300 juta</option>
+                <option>300-500 juta</option>
+                <option>Diatas 500 juta</option>
+            </select>
+        </div>
+        <div class="flex items-end">
+            <button
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">Cari
+                Mobil</button>
+        </div>
+    </div>
+    <!-- Inventory Section -->
+    <section id="inventory" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Inventaris Mobil Terbaru</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Koleksi mobil bekas berkualitas dengan inspeksi lengkap dan
+                    harga kompetitif</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Car Item 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md car-card transition duration-300">
+                    <div class="relative">
+                        <img src="gambar/fortuner.jpeg"
+                            alt="Toyota Fortuner TRD Sportivo 2021 warna hitam dengan interior kulit hitam, kondisi seperti baru"
+                            class="w-full h-56 object-cover">
+                        <span
+                            class="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">Baru
+                            Datang</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Toyota Fortuner TRD</h3>
+                                <p class="text-gray-600">2021 • 25.000 km</p>
+                            </div>
+                            <span class="text-xl font-bold text-blue-600">Rp 680jt</span>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">SUV</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Diesel</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Automatic</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">7 Seater</span>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                            <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Lihat Detail</a>
+                            <button
+                                class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">Ajukan
+                                Penawaran</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car Item 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md car-card transition duration-300">
+                    <div class="relative">
+                        <img src="gambar/turbo.jpg"
+                            alt="Honda Civic Turbo RS 2022 warna putih mutiara dengan velg racing orisinil"
+                            class="w-full h-56 object-cover">
+                        <span
+                            class="absolute top-4 left-4 bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full">Best
+                            Deal</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Honda Civic Turbo</h3>
+                                <p class="text-gray-600">2022 • 12.500 km</p>
+                            </div>
+                            <span class="text-xl font-bold text-blue-600">Rp 560jt</span>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Sedan</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Bensin</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">CVT</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Full Options</span>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                            <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Lihat Detail</a>
+                            <button
+                                class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">Ajukan
+                                Penawaran</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car Item 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md car-card transition duration-300">
+                    <div class="relative">
+                        <img src="gambar/Ertiga.jpeg"
+                            alt="Suzuki Ertiga 2020 warna silver dengan interior beige, kondisi sangat terawat"
+                            class="w-full h-56 object-cover">
+                        <span
+                            class="absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">Ekonomis</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Suzuki Ertiga</h3>
+                                <p class="text-gray-600">2020 • 45.000 km</p>
+                            </div>
+                            <span class="text-xl font-bold text-blue-600">Rp 210jt</span>
+                        </div>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">MPV</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Bensin</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Automatic</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Keluarga</span>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                            <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Lihat Detail</a>
+                            <button
+                                class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">Ajukan
+                                Penawaran</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car Item 4 -->
+            <div
+                class="bg-white rounded-xl overflow-hidden shadow-md car-card transition duration-300 hidden more-cars fade-in">
+                <div class="relative">
+                    <img src="gambar/xpander.jpeg" alt="Mitsubishi Xpander 2021"
+                        class="w-full h-56 object-cover">
+                    <span
+                        class="absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">Ekonomis</span>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Mitsubishi Xpander</h3>
+                            <p class="text-gray-600">2021 • 30.000 km</p>
+                        </div>
+                        <span class="text-xl font-bold text-blue-600">Rp 250jt</span>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">MPV</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Bensin</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Manual</span>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Lihat Detail</a>
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">Ajukan
+                            Penawaran</button>
+                    </div>
+                </div>
+            </div>
+                <!-- Car Item 5 -->
+            <div
+                class="bg-white rounded-xl overflow-hidden shadow-md car-card transition duration-300 hidden more-cars fade-in">
+                <div class="relative">
+                    <img src="gambar/inova.jpeg" alt="Mitsubishi Xpander 2021 warna abu-abu metalik"
+                        class="w-full h-56 object-cover">
+                    <span
+                        class="absolute top-4 left-4 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full">Favorit</span>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Toyota Inova Reborn</h3>
+                            <p class="text-gray-600">2021 • 80.000 km</p>
+                        </div>
+                        <span class="text-xl font-bold text-blue-600">Rp  463jt</span>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">MPV</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Bensin</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Manual</span>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Lihat Detail</a>
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">Ajukan
+                            Penawaran</button>
+                    </div>
+                </div>
+            </div>
+                <!-- Car Item 6 -->
+            <div
+                class="bg-white rounded-xl overflow-hidden shadow-md car-card transition duration-300 hidden more-cars fade-in">
+                <div class="relative">
+                    <img src="gambar/sigra.jpeg" alt="Mitsubishi Xpander 2021 warna abu-abu metalik"
+                        class="w-full h-56 object-cover">
+                    <span
+                        class="absolute top-4 left-4 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full">Favorit</span>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Daihatsu Sigra</h3>
+                            <p class="text-gray-600">2023 • 135.000 km</p>
+                        </div>
+                        <span class="text-xl font-bold text-blue-600">Rp 180jt</span>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">MPV</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Bensin</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Manual</span>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Lihat Detail</a>
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">Ajukan
+                            Penawaran</button>
+                    </div>
+                </div>
+            </div>
+                <!-- Car Item 7 -->
+            <div
+                class="bg-white rounded-xl overflow-hidden shadow-md car-card transition duration-300 hidden more-cars fade-in">
+                <div class="relative">
+                    <img src="gambar/xenia.jpeg" alt="Mitsubishi Xpander 2021 warna abu-abu metalik"
+                        class="w-full h-56 object-cover">
+                    <span
+                        class="absolute top-4 left-4 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full">Favorit</span>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Daihatsu Xenia</h3>
+                            <p class="text-gray-600">2021 • 25.000 km</p>
+                        </div>
+                        <span class="text-xl font-bold text-blue-600">Rp 231jt</span>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">MPV</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Bensin</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Manual</span>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Lihat Detail</a>
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">Ajukan
+                            Penawaran</button>
+                    </div>
+                </div>
+            </div>
+                <!-- Car Item 6 -->
+            <div
+                class="bg-white rounded-xl overflow-hidden shadow-md car-card transition duration-300 hidden more-cars fade-in">
+                <div class="relative">
+                    <img src="gambar/xpander.jpg" alt="Mitsubishi Xpander 2021 warna abu-abu metalik"
+                        class="w-full h-56 object-cover">
+                    <span
+                        class="absolute top-4 left-4 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full">Favorit</span>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Mitsubishi Xpander</h3>
+                            <p class="text-gray-600">2021 • 30.000 km</p>
+                        </div>
+                        <span class="text-xl font-bold text-blue-600">Rp 250jt</span>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">MPV</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Bensin</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Manual</span>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Lihat Detail</a>
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">Ajukan
+                            Penawaran</button>
+                    </div>
+                </div>
+            </div>
+                <!-- Car Item 6 -->
+            <div
+                class="bg-white rounded-xl overflow-hidden shadow-md car-card transition duration-300 hidden more-cars fade-in">
+                <div class="relative">
+                    <img src="gambar/xpander.jpg" alt="Mitsubishi Xpander 2021 warna abu-abu metalik"
+                        class="w-full h-56 object-cover">
+                    <span
+                        class="absolute top-4 left-4 bg-purple-500 text-white text-xs font-bold px-3 py-1 rounded-full">Favorit</span>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Mitsubishi Xpander</h3>
+                            <p class="text-gray-600">2021 • 30.000 km</p>
+                        </div>
+                        <span class="text-xl font-bold text-blue-600">Rp 250jt</span>
+                    </div>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">MPV</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Bensin</span>
+                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Manual</span>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Lihat Detail</a>
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">Ajukan
+                            Penawaran</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+              
+           <div class="mt-12 text-center">
+                <button id="loadMore"
+                    class="bg-white hover:bg-gray-100 text-blue-600 font-medium py-3 px-8 border border-blue-600 rounded-lg transition duration-300 transform hover:scale-105">Lihat
+                    Lebih Banyak Mobil</button>
+            </div>
+        </div>
+    </section>
+    <script src="java.js"></script>
+</body>
+
+</html>
