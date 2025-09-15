@@ -163,8 +163,9 @@ $query = mysqli_query($koneksi, "
                             <!-- Tombol -->
                             <div
                                 class="mt-5 pt-4 border-t border-gray-100 flex justify-between items-center">
+                                <!-- Tombol buka modal -->
                                 <button
-                                    onclick="openModal('modal<?php echo $row['id_cars']; ?>')"
+                                    onclick="openModal('modal-<?php echo $row['id_cars']; ?>')"
                                     class="text-blue-600 hover:text-blue-800 font-medium text-sm">
                                     Lihat Detail
                                 </button>
@@ -173,6 +174,50 @@ $query = mysqli_query($koneksi, "
                                     Ajukan
                                 </button>
                             </div>
+
+                            <!-- Modal Detail -->
+                            <div id="modal-<?php echo $row['id_cars']; ?>"
+                                class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center z-50">
+                                <div class="bg-white w-full max-w-2xl rounded-xl shadow-lg p-8 relative max-h-screen overflow-y-auto">
+
+                                    <!-- Tombol close -->
+                                    <button onclick="closeModal('modal-<?php echo $row['id_cars']; ?>')"
+                                        class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-2xl">&times;</button>
+
+                                    <img src="uploads/<?php echo !empty($row['gambar1']) ? $row['gambar1'] : 'default.jpg'; ?>"
+                                        alt="<?php echo $row['nama']; ?>"
+                                        class="w-full h-64 object-cover rounded-lg">
+
+                                    <h1 class="text-2xl font-bold text-gray-800 mt-4"><?php echo $row['nama']; ?></h1>
+                                    <?php echo $row['tahun'] . " | " . $row['km']  . " KM | " . $row['transmisi'] . " | " . $row['bahan_bakar']; ?>
+
+                                    <p class="text-2xl font-bold text-blue-600 mt-2">Rp <?= number_format($row['harga'], 0, ',', '.'); ?></p>
+
+                                    <h2 class="text-lg font-semibold mt-6">Spesifikasi</h2>
+
+                                    <?php
+                                    $deskripsi = $row['deskripsi'];
+                                    $items = explode(".", $deskripsi);
+                                    ?>
+                                    <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                                        <?php foreach ($items as $item): ?>
+                                            <?php if (trim($item) != ""): ?>
+                                                <li><?= htmlspecialchars(trim($item)) ?></li>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </ul>
+
+                                    <div class="mt-6 flex gap-3 pb-4">
+                                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
+                                            Hubungi Penjual
+                                        </button>
+                                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                                            Ajukan Penawaran
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 <?php } ?>
