@@ -3,10 +3,16 @@ include "koneksi.php"; // koneksi ke database
 
 // Query join cars + images
 $query = mysqli_query($koneksi, "
-    SELECT cars.*, images.gambar1 
+    SELECT cars.*, images.gambar1, images.gambar2, images.gambar3, images.gambar4
     FROM cars 
     LEFT JOIN images ON cars.id_cars = images.id_cars
+
 ");
+
+
+$base_url = "http://localhost/carshop/";
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -161,37 +167,77 @@ $query = mysqli_query($koneksi, "
                             </div>
 
                             <!-- Tombol -->
-                            <div
-                                class="mt-5 pt-4 border-t border-gray-100 flex justify-between items-center">
+                            <!-- Tombol -->
+                            <div class="mt-5 pt-4 border-t border-gray-100 flex justify-start">
                                 <!-- Tombol buka modal -->
                                 <button
                                     onclick="openModal('modal-<?php echo $row['id_cars']; ?>')"
                                     class="text-blue-600 hover:text-blue-800 font-medium text-sm">
                                     Lihat Detail
                                 </button>
-                                <button
-                                    class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition duration-200">
-                                    Ajukan
-                                </button>
                             </div>
+
 
                             <!-- Modal Detail -->
                             <div id="modal-<?php echo $row['id_cars']; ?>"
                                 class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center z-50">
                                 <div class="bg-white w-full max-w-2xl rounded-xl shadow-lg p-8 relative max-h-screen overflow-y-auto">
 
-                                    <!-- Tombol close -->
-                                    <button onclick="closeModal('modal-<?php echo $row['id_cars']; ?>')"
-                                        class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-2xl">&times;</button>
+                                    <!-- Carousel Gambar -->
+                                    <div id="carousel-<?php echo $row['id_cars']; ?>" class="relative w-full">
+                                        <div class="relative w-full overflow-hidden rounded-lg bg-gray-100" style="height:400px;">
+                                            <!-- Slide 1 -->
+                                            <div class="duration-700 ease-in-out" data-carousel-item>
+                                                <img src="uploads/<?php echo !empty($row['gambar1']) ? $row['gambar1'] : 'default.jpg'; ?>"
+                                                    alt="Gambar 1"
+                                                    class="w-full max-h-[400px] object-contain">
+                                            </div>
 
-                                    <img src="uploads/<?php echo !empty($row['gambar1']) ? $row['gambar1'] : 'default.jpg'; ?>"
-                                        alt="<?php echo $row['nama']; ?>"
-                                        class="w-full h-64 object-cover rounded-lg">
+                                            <!-- Slide 2 -->
+                                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                                <img src="uploads/<?php echo !empty($row['gambar2']) ? $row['gambar2'] : 'default.jpg'; ?>"
+                                                    alt="Gambar 2"
+                                                    class="w-full max-h-[400px] object-contain">
+                                            </div>
 
-                                    <h1 class="text-2xl font-bold text-gray-800 mt-4"><?php echo $row['nama']; ?></h1>
-                                    <?php echo $row['tahun'] . " | " . $row['km']  . " KM | " . $row['transmisi'] . " | " . $row['bahan_bakar']; ?>
+                                            <!-- Slide 3 -->
+                                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                                <img src="uploads/<?php echo !empty($row['gambar3']) ? $row['gambar3'] : 'default.jpg'; ?>"
+                                                    alt="Gambar 3"
+                                                    class="w-full max-h-[400px] object-contain">
+                                            </div>
 
-                                    <p class="text-2xl font-bold text-blue-600 mt-2">Rp <?= number_format($row['harga'], 0, ',', '.'); ?></p>
+                                            <!-- Slide 4 -->
+                                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                                <img src="uploads/<?php echo !empty($row['gambar4']) ? $row['gambar4'] : 'default.jpg'; ?>"
+                                                    alt="Gambar 4"
+                                                    class="w-full max-h-[400px] object-contain">
+                                            </div>
+
+
+                                            <!-- Tombol Navigasi (posisi di atas gambar) -->
+                                            <button type="button" data-carousel-prev
+                                                class="absolute top-1/2 left-3 -translate-y-1/2 bg-black/40 text-white rounded-full w-9 h-9 flex items-center justify-center hover:bg-black/60 transition">
+                                                ‹
+                                            </button>
+                                            <button type="button" data-carousel-next
+                                                class="absolute top-1/2 right-3 -translate-y-1/2 bg-black/40 text-white rounded-full w-9 h-9 flex items-center justify-center hover:bg-black/60 transition">
+                                                ›
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+
+                                    <!-- Detail Mobil -->
+                                    <h1 class="text-2xl font-bold text-gray-800 mt-6"><?php echo $row['nama']; ?></h1>
+                                    <p class="text-gray-600 text-sm mt-1">
+                                        <?php echo $row['tahun'] . " | " . $row['km']  . " KM | " . $row['transmisi'] . " | " . $row['bahan_bakar']; ?>
+                                    </p>
+
+                                    <p class="text-2xl font-bold text-blue-600 mt-2">
+                                        Rp <?= number_format($row['harga'], 0, ',', '.'); ?>
+                                    </p>
 
                                     <h2 class="text-lg font-semibold mt-6">Spesifikasi</h2>
 
@@ -207,16 +253,27 @@ $query = mysqli_query($koneksi, "
                                         <?php endforeach; ?>
                                     </ul>
 
-                                    <div class="mt-6 flex gap-3 pb-4">
-                                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg">
-                                            Hubungi Penjual
+                                    <!-- Tombol Aksi -->
+                                    <div class="mt-8 flex flex-wrap gap-3 pb-4 justify-end">
+                                        <button onclick="closeModal('modal-<?php echo $row['id_cars']; ?>')"
+                                            class="bg-gray-500 hover:bg-gray-600 text-white px-5 py-2 rounded-lg font-medium transition">
+                                            Kembali
                                         </button>
-                                        <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                                        <button
+                                            onclick="ajukanPembelian(
+                                            '<?php echo $row['nama']; ?>',
+                                            'uploads/<?php echo !empty($row['gambar1']) ? $row['gambar1'] : 'default.jpg'; ?>')"
+                                            class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg font-medium transition">
                                             Ajukan Penawaran
                                         </button>
+
                                     </div>
                                 </div>
                             </div>
+
+
+
+
 
                         </div>
                     </div>
@@ -225,6 +282,58 @@ $query = mysqli_query($koneksi, "
         </div>
     </section>
 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll("[id^='carousel-']").forEach(function(carousel) {
+                const items = carousel.querySelectorAll("[data-carousel-item]");
+                const prevBtn = carousel.querySelector("[data-carousel-prev]");
+                const nextBtn = carousel.querySelector("[data-carousel-next]");
+
+                let currentIndex = 0;
+
+                function showSlide(index) {
+                    items.forEach((item, i) => {
+                        if (i === index) {
+                            item.classList.remove("hidden");
+                        } else {
+                            item.classList.add("hidden");
+                        }
+                    });
+                }
+
+                // Tampilkan slide pertama
+                showSlide(currentIndex);
+
+                // Tombol prev
+                prevBtn.addEventListener("click", function() {
+                    currentIndex = (currentIndex - 1 + items.length) % items.length;
+                    showSlide(currentIndex);
+                });
+
+                // Tombol next
+                nextBtn.addEventListener("click", function() {
+                    currentIndex = (currentIndex + 1) % items.length;
+                    showSlide(currentIndex);
+                });
+            });
+        });
+
+
+        function ajukanPembelian(namaMobil, gambar) {
+    // Nomor WhatsApp tujuan (ganti dengan nomor kamu, format internasional tanpa +)
+    let nomor = "6289656991190"; 
+    
+    // Buat pesan
+    let pesan = `Saya ingin membeli Mobil ini: ${namaMobil}\n\nLihat gambar: http://localhost/carshop/${gambar}`;
+    
+    // Encode ke URL
+    let url = `https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`;
+    
+    // Redirect ke WhatsApp
+    window.open(url, "_blank");
+}
+    </script>
     <script src="java.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
